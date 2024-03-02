@@ -14,7 +14,7 @@ const BranchLayout = () => {
                     <span className='font-bold'>Account Aggregator</span>
                 </div>
             </div>
-            <main className='pt-20'>
+            <main className='pt-20' style={{ background: '#fafbfd', minHeight: '100vh' }}>
                 <Outlet />
             </main>
         </div >
