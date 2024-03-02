@@ -9,6 +9,7 @@ import LandingPage from './Pages/Common/LandingPage';
 import BranchLayout from './Layouts/BranchLayout';
 import VerificationPage from './Pages/Branch/VerificationPage';
 import ViewConsents from './Pages/Branch/ViewConsents';
+import AccountDetailsPage from './Pages/Branch/AccountDetailsPage';
 
 const App = () => {
   const [user] = useState({
@@ -55,7 +56,11 @@ const App = () => {
         {
           path: '/branch/viewconsents',
           element: <ViewConsents />,
+        },{
+          path: '/branch/accountdetails',
+          element: <AccountDetailsPage />,
         },
+
       ],
     },
     // {
