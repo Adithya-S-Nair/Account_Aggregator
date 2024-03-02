@@ -5,7 +5,7 @@ import { FormControlLabel, FormGroup } from '@mui/material';
 
 const LoginPage = () => {
   return (
-    <div className='w-full pt-20' style={{ background: '#fafbfd' }}>
+    <div className='w-full pt-20' style={{ background: '#fafbfd', minHeight: '100vh' }}>
       <div className='flex flex-col items-center'>
         <div>
           <h2 className='font-bold mb-3'>Welcome back to Account Aggregator</h2>
