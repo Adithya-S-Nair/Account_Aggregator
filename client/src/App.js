@@ -10,6 +10,7 @@ import BranchLayout from './Layouts/BranchLayout';
 import VerificationPage from './Pages/Branch/VerificationPage';
 import ViewConsents from './Pages/Branch/ViewConsents';
 import AccountDetailsPage from './Pages/Branch/AccountDetailsPage';
+import FiReq from './Pages/Branch/FiReq';
 
 const App = () => {
   const [user] = useState({
@@ -30,7 +31,7 @@ const App = () => {
 
     if (user.user_type === 'branch' && Layout === BranchLayout) {
       return children
-    } 
+    }
     //else if (user.user_type === 'Users' && Layout === UserLayout) {
     //   return children
     // } 
@@ -56,11 +57,15 @@ const App = () => {
         {
           path: '/branch/viewconsents',
           element: <ViewConsents />,
-        },{
+        },
+        {
           path: '/branch/accountdetails',
           element: <AccountDetailsPage />,
         },
-
+        {
+          path: '/branch/viewfireq/:consentId',
+          element: <FiReq />,
+        },
       ],
     },
     // {
