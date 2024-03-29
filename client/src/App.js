@@ -11,6 +11,7 @@ import VerificationPage from './Pages/Branch/VerificationPage';
 import ViewConsents from './Pages/Branch/ViewConsents';
 import AccountDetailsPage from './Pages/Branch/AccountDetailsPage';
 import FiReq from './Pages/Branch/FiReq';
+import Verifyotp from './Pages/Auth/Verifyotp';
 
 const App = () => {
   const [user] = useState({
@@ -85,6 +86,10 @@ const App = () => {
     {
       path: '/login',
       element: <LoginPage />,
+    },
+    {
+      path: '/verifylogin',
+      element: <Verifyotp />,
     },
     {
       path: '/register',

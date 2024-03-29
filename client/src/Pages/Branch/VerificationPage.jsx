@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import OtpInput from 'react-otp-input';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
+import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 
 const VerificationPage = () => {
-    const [otp, setOtp] = React.useState('')
+    const [otp, setOtp] = useState('')
+
     const handleChange = (newValue) => {
         setOtp(newValue)
     }
@@ -17,15 +17,20 @@ const VerificationPage = () => {
                 </div>
                 <div className='flex flex-col gap-2 mt-5 mb-5'>
                     <label htmlFor="">AA ID :</label>
-                    <input
-                        type="text"
-                        style={{
-                            background: '#e7eef3',
-                            padding: '10px',
-                        }}
-                        placeholder='Enter your aaid'
-                        className='text-black-500 rounded-lg focus:bg mb-2'
-                    />
+                    <div className='flex items-center gap-2 justify-between mb-2'>
+                        <input
+                            type="text"
+                            style={{
+                                background: '#e7eef3',
+                                padding: '10px',
+                            }}
+                            placeholder='Enter your aaid'
+                            className='text-black-500 rounded-lg focus:bg w-full'
+                        />
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl">
+                            <ManageSearchIcon />
+                        </button>
+                    </div>
                 </div>
                 <hr />
                 <div className="flex items-center justify-between mt-5 mb-5">
@@ -46,7 +51,7 @@ const VerificationPage = () => {
                 <div className="flex justify-center">
                     <OtpInput
                         value={otp}
-                        onChange={setOtp}
+                        onChange={handleChange}
                         numInputs={6}
                         inputStyle={{
                             background: '#e7eef3',
