@@ -96,6 +96,10 @@ const App = () => {
       element: <RegisterPage />,
     },
     {
+      path: '/verifyotp',
+      element: <Verifyotp />,
+    },
+    {
       path: '/',
       element: <LandingPage />,
     },

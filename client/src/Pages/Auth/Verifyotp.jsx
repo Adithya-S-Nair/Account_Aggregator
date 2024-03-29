@@ -27,7 +27,7 @@ const Verifyotp = () => {
         })
             .then((res) => {
                 if (res.data === 1) {
-                    navigate('/branch/viewconsents')
+                    navigate('/branch/')
                 }
             })
             .catch((err) => {
