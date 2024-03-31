@@ -1,6 +1,6 @@
 import express from 'express';
 import checkAuth from '../middlewares/checkAuth.js';
-import { login, logout, verify, verifyOtp } from '../controllers/authController.js';
+import { login, verifyOtp, logout, verify  } from '../controllers/authController.js';
 
 const router = express.Router();
 
@@ -8,6 +8,6 @@ const router = express.Router();
 router.post('/login', login);
 router.post('/verifyotp', verifyOtp);
 router.get('/logout', checkAuth, logout);
-router.get('/verify', checkAuth, verify);
+router.get('/verify', checkAuth, verify);                                                               
 
-export default router;
+export default router;  

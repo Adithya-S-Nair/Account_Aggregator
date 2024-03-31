@@ -1,13 +1,37 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import OtpInput from 'react-otp-input';
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
+import { makeRequest } from '../../Axios';
+import { Navigate, useNavigate } from 'react-router-dom';
+import AccountDetailsPage from './AccountDetailsPage';
+import { AccountDetailContext } from '../../Context/AccountDetailContext';
 
 const VerificationPage = () => {
     const [otp, setOtp] = useState('')
+    // const [aaid, setAaid] = useState('')
+    const {setAccountDetail, aaid, setAaid} = useContext(AccountDetailContext)
+    const navigate = useNavigate();
 
     const handleChange = (newValue) => {
         setOtp(newValue)
     }
+
+    const handleaaid = (e) => {
+        setAaid(e.target.value)
+    }
+    console.log(aaid);
+
+    const handleSubmit = () => { 
+        makeRequest.get(`/api/accountdetail/accountdetails/${aaid}`)
+            .then((res) => {
+                console.log(res.data);
+                setAccountDetail(res.data);
+                navigate('/branch/accountdetails')
+            }).catch((error) => {
+                console.log(error);
+            })
+    }
+
     return (
         <div className='flex justify-center'>
             <div className='w-1/2'>
@@ -26,8 +50,10 @@ const VerificationPage = () => {
                             }}
                             placeholder='Enter your aaid'
                             className='text-black-500 rounded-lg focus:bg w-full'
+                            onChange={handleaaid}
+
                         />
-                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl">
+                        <button onClick={handleSubmit} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl">
                             <ManageSearchIcon />
                         </button>
                     </div>
@@ -76,6 +102,7 @@ const VerificationPage = () => {
                 </div>
             </div>
         </div>
+
     )
 }
 

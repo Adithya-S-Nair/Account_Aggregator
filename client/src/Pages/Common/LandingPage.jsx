@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { AuthContext } from '../../Context/AuthContext'
 
 const LandingPage = () => {
+    const {user, setuser} = useContext(AuthContext)
+
+    
     return (
-        <div>LandingPage</div>
+        <div>
+            Landing Page
+        </div>
     )
 }
 

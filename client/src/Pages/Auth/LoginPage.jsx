@@ -1,17 +1,26 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Checkbox from '@mui/material/Checkbox';
 import { FormControlLabel, FormGroup } from '@mui/material';
 import { useNavigate } from 'react-router-dom'
 import { OtpContext } from '../../Context/OtpContext';
 import { makeRequest } from '../../Axios';
+import { AuthContext } from '../../Context/AuthContext';
 
 const LoginPage = () => {
+  const { user, setUser } = useContext(AuthContext)
   const { setOtpData } = useContext(OtpContext)
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     uid: '',
     password: ''
   });
+
+  useEffect(() => {
+    if (user) {
+      navigate('/branch/accountdetails')
+    }
+  }, [user])
+
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -24,7 +33,7 @@ const LoginPage = () => {
   const handleSubmit = (ev) => {
     ev.preventDefault();
     console.log(formData);
-    makeRequest.post('/verify/login', formData)
+    makeRequest.post('/api/auth/login', formData)
       .then((res) => {
         console.log(res);
         if (res.status === 200) {
@@ -35,6 +44,10 @@ const LoginPage = () => {
       .catch((err) => {
         console.log(err);
       })
+      .catch((err) => {
+        console.log(err);
+      });
+     
   }
 
   return (

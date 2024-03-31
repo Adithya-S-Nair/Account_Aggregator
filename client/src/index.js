@@ -4,12 +4,18 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { OtpContextProvider } from './Context/OtpContext';
+import { AuthContextProvider } from './Context/AuthContext';
+import { AccountDetailContextProvider } from './Context/AccountDetailContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <OtpContextProvider>
-      <App />
+      <AuthContextProvider>
+        <AccountDetailContextProvider>
+          <App />
+        </AccountDetailContextProvider>
+      </AuthContextProvider>
     </OtpContextProvider>
   </React.StrictMode>
 );

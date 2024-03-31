@@ -3,8 +3,10 @@ import OtpInput from 'react-otp-input';
 import { useNavigate } from 'react-router-dom';
 import { OtpContext } from '../../Context/OtpContext';
 import { makeRequest } from '../../Axios';
+import { AuthContext } from '../../Context/AuthContext';
 
 const Verifyotp = () => {
+    const { user, setUser } = useContext(AuthContext)
     const [otp, setOtp] = useState('')
     const navigate = useNavigate()
     const { otpData } = useContext(OtpContext)
@@ -13,26 +15,45 @@ const Verifyotp = () => {
         setOtp(newValue)
     }
 
+    const handleBackButton = () =>{
+        navigate('/login');
+    }
+
     useEffect(() => {
         if (!otpData) {
             navigate('/login')
         }
     }, [otpData])
 
+    useEffect(() => {
+        if (user) {
+            navigate('/branch/verify')
+        }
+    }, [user, setUser])
+
     const handleSubmit = () => {
-        makeRequest.post("/verify/otp", {
+        console.log(otpData);
+        makeRequest.post('/api/auth/verifyotp', {
             uid: otpData.Uid,
             otpref: otpData.OtpRef,
-            otp
+            otp,
+            name: otpData.Name,
         })
-            .then((res) => {
-                if (res.data === 1) {
-                    navigate('/branch/')
+            .then(async (res) => {
+                if (res.data) {
+                    try {
+                        const response = await makeRequest.get('/api/auth/verify');
+                        setUser(response.data);
+                        navigate('/branch/verify')
+                    } catch (error) {
+                        console.error('Error fetching user details:', error);
+                    }
+                    
                 }
             })
             .catch((err) => {
                 console.log(err);
-            })
+            });
     }
 
     return (
@@ -66,7 +87,7 @@ const Verifyotp = () => {
                     />
                 </div>
                 <div className='flex items-center justify-end gap-4 mt-8'>
-                    <button class="hover:bg-blue-700 text-black font-bold py-2 px-4 rounded-xl" style={{ background: '#e7eef3' }}>
+                    <button onClick={handleBackButton} class="hover:bg-blue-700 text-black font-bold py-2 px-4 rounded-xl" style={{ background: '#e7eef3' }}>
                         Back
                     </button>
                     <button onClick={handleSubmit} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl">

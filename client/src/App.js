@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 import './App.css';
-
 import LoginPage from './Pages/Auth/LoginPage';
 import RegisterPage from './Pages/Auth/RegisterPage';
 import NotFound from './Pages/Error/NotFound';
@@ -12,35 +11,50 @@ import ViewConsents from './Pages/Branch/ViewConsents';
 import AccountDetailsPage from './Pages/Branch/AccountDetailsPage';
 import FiReq from './Pages/Branch/FiReq';
 import Verifyotp from './Pages/Auth/Verifyotp';
+import { makeRequest } from './Axios';
+import { AuthContext } from './Context/AuthContext';
 
 const App = () => {
-  const [user] = useState({
-    user_id: 1,
-    user_name: 'adithya',
-    user_type: 'branch'
-  });
-  const [loading, setLoading] = useState(false);
+
+  const { user, setUser } = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const response = await makeRequest.get('/api/auth/verify');
+        setUser(response.data);
+      } catch (error) {
+        console.error('Error fetching user details:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (!user) {
+      fetchUserDetails();
+    } else {
+      setLoading(false);
+    }
+  }, [user, setUser]);
 
   const ProtectedRoute = ({ children, layout: Layout }) => {
     if (loading) {
-      return null;
+      return null; 
     }
 
     if (!user) {
       return <Navigate to="/login" />;
     }
 
-    if (user.user_type === 'branch' && Layout === BranchLayout) {
+    if (user && Layout === BranchLayout) {
       return children
     }
-    //else if (user.user_type === 'Users' && Layout === UserLayout) {
-    //   return children
-    // } 
+   
     else {
-      return <Navigate to="/login" />; // Redirect to home or handle unauthorized access
+      return <Navigate to="/login" />; 
     }
   };
-
 
   const router = createBrowserRouter([
     {
@@ -69,20 +83,6 @@ const App = () => {
         },
       ],
     },
-    // {
-    //   path: '/user',
-    //   element: (
-    //     <ProtectedRoute layout={UserLayout}>
-    //       <UserLayout />
-    //     </ProtectedRoute>
-    //   ),
-    //   children: [
-    //     {
-    //       path: '/user/dashboard',
-    //       element: <ProjectDashboard />,
-    //     },
-    //   ],
-    // },
     {
       path: '/login',
       element: <LoginPage />,

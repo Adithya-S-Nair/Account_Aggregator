@@ -8,6 +8,8 @@ export const login = (req, res) => {
     makeRequest.post('/verify/login', req.body)
         .then((response) => {
             if (response.status === 200) {
+                console.log(response.data);
+                
                 return res.status(200).json(response.data)
             }
             else
@@ -19,23 +21,24 @@ export const login = (req, res) => {
 };
 
 export const verifyOtp = (req, res) => {
-
+    
     makeRequest.post('/verify/otp', {
         uid: req.body.uid,
         otpref: req.body.otpref,
-        otp: req.body.otp
+        otp: req.body.otp,
+        name: req.body.name,
     })
         .then((response) => {
-            if (response.data === 1) {
+            if (response.data) {
+                console.log(req.body);    
                 const token = jwt.sign(
                     {
                         userId: req.body.uid,
-                        userName: req.body.userName,
+                        userName: req.body.name,
                     },
                     process.env.SECRET
                 );
-
-                res.cookie("accessToken", token, { httpOnly: true }).status(200).json(req.body);
+                res.cookie("accessToken", token, { httpOnly: true }).status(200).json(req.body);            
             }
             else
                 return res.status(401)

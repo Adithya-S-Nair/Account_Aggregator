@@ -1,6 +1,6 @@
 import axios from "axios";
 
 export const makeRequest = axios.create({
-    baseURL: "http://api.kriate.co.in:8344/",
+    baseURL: "http://localhost:5000/",
     withCredentials: true,
 });
