@@ -1,61 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { makeRequest } from '../../Axios';
+import { AccountDetailContext } from '../../Context/AccountDetailContext';
+import { useParams } from 'react-router-dom';
 
 const FiReq = () => {
     const [fiReqs, setFiReqs] = useState();
+    const { aaid, setAaid } = useContext(AccountDetailContext)
+    const { consentId } = useParams();
 
     useEffect(() => {
-        setFiReqs([
-            {
-                id: 1,
-                title: 'Report for financial information request #98765',
-                requestedAgo: 'Requested 3 days ago',
-            },
-            {
-                id: 2,
-                title: 'Summary for financial request #54321',
-                requestedAgo: 'Requested 1 day ago',
-            },
-            {
-                id: 3,
-                title: 'Detailed report for request #11111',
-                requestedAgo: 'Requested 7 days ago',
-            },
-            {
-                id: 4,
-                title: 'Financial analysis for request #22222',
-                requestedAgo: 'Requested 2 days ago',
-            },
-            {
-                id: 5,
-                title: 'Report for request #33333',
-                requestedAgo: 'Requested 5 days ago',
-            },
-            {
-                id: 6,
-                title: 'Financial overview for request #44444',
-                requestedAgo: 'Requested 4 days ago',
-            },
-            {
-                id: 7,
-                title: 'Summary report for request #55555',
-                requestedAgo: 'Requested 6 days ago',
-            },
-            {
-                id: 8,
-                title: 'Detailed analysis for request #66666',
-                requestedAgo: 'Requested 1 week ago',
-            },
-            {
-                id: 9,
-                title: 'Financial report for request #77777',
-                requestedAgo: 'Requested 2 weeks ago',
-            },
-            {
-                id: 10,
-                title: 'Overview for request #88888',
-                requestedAgo: 'Requested 4 weeks ago',
-            },
-        ])
+        makeRequest.get(`/api/accountdetail/getfirequest/${aaid}/${consentId}`)
+        .then((res)=>{
+            console.log(res.data.FIRequestList);
+            setFiReqs(res.data.FIRequestList);
+        }).catch((error)=>{
+            console.log(error);
+        })
     }, [])
 
     return (
@@ -112,8 +72,8 @@ const FiReq = () => {
                                     </svg>
                                 </div>
                                 <div className='flex flex-col'>
-                                    <span>{fiReq.title}</span>
-                                    <span style={{ color: 'rgb(62, 115, 152)' }}>{fiReq.requestedAgo}</span>
+                                    <span>{fiReq.sessionId}</span>
+                                    <span style={{ color: 'rgb(62, 115, 152)' }}>{fiReq.sessionStatus}</span>
                                 </div>
                             </div>
                             <button class="hover:bg-blue-700 text-black font-bold py-2 px-4 rounded-xl" style={{ background: '#e7eef3' }}>

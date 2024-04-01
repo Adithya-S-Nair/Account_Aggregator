@@ -16,10 +16,23 @@ export const accountDetails = (req, res) => {
 }
 
 export const getConsents = (req, res) => {
-    console.log(req.params.aaid);
+    // console.log(req.params.aaid);
     const {aaid} = req.params;
 
     makeRequest.get(`/aa/list/consent?custid=${aaid}@finvu`)
+    .then((response) => {
+        return res.status(200).json(response.data);
+    }).catch((error) => {
+        console.log(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    });
+}
+
+export const getFiRequest = (req, res) => {
+    // console.log(req.params.aaid);
+    const {aaid, consentId} = req.params;
+
+    makeRequest.get(`/aa/list/FIRequest?custId=${aaid}@finvu&consentId=${consentId}`)
     .then((response) => {
         return res.status(200).json(response.data);
     }).catch((error) => {
