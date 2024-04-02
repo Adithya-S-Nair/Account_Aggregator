@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import DatePickerModal from '../../Components/DatePickerModal';
 import { makeRequest } from '../../Axios';
 import { AccountDetailContext } from '../../Context/AccountDetailContext';
-import FiReq from './FiReq';
+import moment from 'moment';
 
 const ViewConsents = () => {
     const navigate = useNavigate();
@@ -28,7 +28,7 @@ const ViewConsents = () => {
             })
     }, [])
 
-    console.log(consentData);
+    // console.log(consentData);
 
     const handleSelectedConsent = (consentId) => {
         navigate(`/branch/viewfireq/${consentId}`);
@@ -85,7 +85,7 @@ const ViewConsents = () => {
                                         {consent.status}
                                     </Typography>
                                     <Typography variant="body2">
-                                        {`${consent.consentDetail.consentStart} - ${consent.consentDetail.consentExpiry}`}
+                                        {`${moment(consent.consentDetail.consentStart).format('YYYY-MM-DD')} - ${moment(consent.consentDetail.consentExpiry).format('YYYY-MM-DD')}`}
                                     </Typography>
                                 </CardContent>
                             </Card>

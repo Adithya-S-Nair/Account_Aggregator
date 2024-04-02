@@ -33,7 +33,7 @@ const LoginPage = () => {
   const handleSubmit = (ev) => {
     ev.preventDefault();
     console.log(formData);
-    makeRequest.post('/api/auth/login', formData)
+    makeRequest.post('/auth/login', formData)
       .then((res) => {
         console.log(res);
         if (res.status === 200) {

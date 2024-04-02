@@ -33,7 +33,7 @@ const Verifyotp = () => {
 
     const handleSubmit = () => {
         console.log(otpData);
-        makeRequest.post('/api/auth/verifyotp', {
+        makeRequest.post('/auth/verifyotp', {
             uid: otpData.Uid,
             otpref: otpData.OtpRef,
             otp,
@@ -42,7 +42,7 @@ const Verifyotp = () => {
             .then(async (res) => {
                 if (res.data) {
                     try {
-                        const response = await makeRequest.get('/api/auth/verify');
+                        const response = await makeRequest.get('/auth/verify');
                         setUser(response.data);
                         navigate('/branch/verify')
                     } catch (error) {

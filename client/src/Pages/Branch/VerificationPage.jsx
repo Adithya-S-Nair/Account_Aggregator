@@ -19,12 +19,12 @@ const VerificationPage = () => {
     const handleaaid = (e) => {
         setAaid(e.target.value)
     }
-    console.log(aaid);
+    // console.log(aaid);
 
     const handleSubmit = () => { 
         makeRequest.get(`/accountdetail/accountdetails/${aaid}`)
             .then((res) => {
-                console.log(res.data);
+                // console.log(res.data);
                 setAccountDetail(res.data);
                 navigate('/branch/accountdetails')
             }).catch((error) => {
