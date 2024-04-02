@@ -25,7 +25,8 @@ const ViewConsents = () => {
         makeRequest.get(`/accountdetail/getconsents/${aaid}`)
             .then((res) => {
                 setConsentData(res.data.ConsentList)
-            }).catch((error) => {
+            })
+            .catch((error) => {
                 console.log(error);
             })
     }, [])
@@ -49,7 +50,7 @@ const ViewConsents = () => {
     }
 
     const goBack = () => {
-        window.history.back();
+        navigate('/branch/accountdetails')
     };
 
     return (

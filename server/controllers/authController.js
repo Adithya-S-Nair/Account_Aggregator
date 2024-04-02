@@ -9,7 +9,7 @@ export const login = (req, res) => {
         .then((response) => {
             if (response.status === 200) {
                 console.log(response.data);
-                
+
                 return res.status(200).json(response.data)
             }
             else
@@ -21,16 +21,14 @@ export const login = (req, res) => {
 };
 
 export const verifyOtp = (req, res) => {
-    
     makeRequest.post('/verify/otp', {
         uid: req.body.uid,
         otpref: req.body.otpref,
         otp: req.body.otp,
-        name: req.body.name,
     })
         .then((response) => {
-            if (response.data) {
-                console.log(req.body);    
+            if (response.data === 1) {
+                console.log(req.body);
                 const token = jwt.sign(
                     {
                         userId: req.body.uid,
@@ -38,10 +36,11 @@ export const verifyOtp = (req, res) => {
                     },
                     process.env.SECRET
                 );
-                res.cookie("accessToken", token, { httpOnly: true }).status(200).json(req.body);            
+                return res.cookie("accessToken", token, { httpOnly: true }).status(200).json(req.body);
             }
-            else
-                return res.status(401)
+            else {
+                return res.status(401).json({ "error": "Invalid otp" })
+            }
         }).catch((error) => {
             return res.status(500).json({ "error": error.message })
         })

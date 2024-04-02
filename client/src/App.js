@@ -22,7 +22,8 @@ const App = () => {
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        const response = await makeRequest.get('/api/auth/verify');
+        const response = await makeRequest.get('/auth/verify');
+        console.log(response.data);
         setUser(response.data);
       } catch (error) {
         console.error('Error fetching user details:', error);
@@ -38,9 +39,39 @@ const App = () => {
     }
   }, [user, setUser]);
 
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      makeRequest.get('/auth/logout')
+        .then(() => {
+          // Optional: You might want to perform some cleanup or additional actions before the page is unloaded
+        });
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleBackButton = () => {
+      makeRequest.get('/auth/logout')
+        .then(() => {
+          window.location.reload()
+        })
+    };
+
+    window.addEventListener('popstate', handleBackButton);
+
+    return () => {
+      window.removeEventListener('popstate', handleBackButton);
+    };
+  }, []);
+
   const ProtectedRoute = ({ children, layout: Layout }) => {
     if (loading) {
-      return null; 
+      return null;
     }
 
     if (!user) {
@@ -50,9 +81,9 @@ const App = () => {
     if (user && Layout === BranchLayout) {
       return children
     }
-   
+
     else {
-      return <Navigate to="/login" />; 
+      return <Navigate to="/login" />;
     }
   };
 

@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { makeRequest } from '../../Axios';
 import { AccountDetailContext } from '../../Context/AccountDetailContext';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const FiReq = () => {
+    const navigate = useNavigate();
     const [fiReqs, setFiReqs] = useState();
     const { aaid, setAaid } = useContext(AccountDetailContext)
     const { consentId } = useParams();
@@ -28,7 +29,7 @@ const FiReq = () => {
     }, [aaid, consentId])
 
     const goBack = () => {
-        window.history.back();
+        navigate('/branch/viewconsents')
     };
 
     return (

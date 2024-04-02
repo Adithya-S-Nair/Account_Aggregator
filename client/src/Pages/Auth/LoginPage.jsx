@@ -10,6 +10,7 @@ const LoginPage = () => {
   const { user, setUser } = useContext(AuthContext)
   const { setOtpData } = useContext(OtpContext)
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
     uid: '',
     password: ''
@@ -32,7 +33,7 @@ const LoginPage = () => {
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    console.log(formData);
+    setLoading(true)
     makeRequest.post('/auth/login', formData)
       .then((res) => {
         console.log(res);
@@ -44,10 +45,10 @@ const LoginPage = () => {
       .catch((err) => {
         console.log(err);
       })
-      .catch((err) => {
-        console.log(err);
+      .finally(() => {
+        setLoading(false)
       });
-     
+
   }
 
   return (
@@ -91,9 +92,23 @@ const LoginPage = () => {
           <FormGroup className='mt-3 mb-3'>
             <FormControlLabel control={<Checkbox />} label="Keep me signed in" />
           </FormGroup>
-          <button type='submit' className="w-full hover:bg-blue-700 text-white text-xs font-semibold py-2 px-4 rounded-xl" style={{ background: '#1395ec' }}>
-            Log in
-          </button>
+          <div>
+            {loading ? (
+              // Render loading spinner when loading is true
+              <div className="flex justify-center items-center">
+                <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
+              </div>
+            ) : (
+              // Render login button when loading is false
+              <button
+                type='submit'
+                className="w-full hover:bg-blue-700 text-white text-xs font-semibold py-2 px-4 rounded-xl"
+                style={{ background: '#1395ec' }}
+              >
+                Log in
+              </button>
+            )}
+          </div>
         </form>
 
         <div className='mt-1'>

@@ -15,7 +15,7 @@ const Verifyotp = () => {
         setOtp(newValue)
     }
 
-    const handleBackButton = () =>{
+    const handleBackButton = () => {
         navigate('/login');
     }
 
@@ -39,21 +39,14 @@ const Verifyotp = () => {
             otp,
             name: otpData.Name,
         })
-            .then(async (res) => {
-                if (res.data) {
-                    try {
-                        const response = await makeRequest.get('/auth/verify');
-                        setUser(response.data);
-                        navigate('/branch/verify')
-                    } catch (error) {
-                        console.error('Error fetching user details:', error);
-                    }
-                    
-                }
+            .then((response) => {
+                setUser(response.data);
+                navigate('/branch/verify')
             })
-            .catch((err) => {
-                console.log(err);
-            });
+            .catch((error) => {
+                console.error('Error fetching user details:', error);
+
+            })
     }
 
     return (
