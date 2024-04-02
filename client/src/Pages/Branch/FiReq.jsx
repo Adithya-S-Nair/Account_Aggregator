@@ -3,6 +3,7 @@ import { makeRequest } from '../../Axios';
 import { AccountDetailContext } from '../../Context/AccountDetailContext';
 import { useParams } from 'react-router-dom';
 import moment from 'moment';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const FiReq = () => {
     const [fiReqs, setFiReqs] = useState();
@@ -26,10 +27,17 @@ const FiReq = () => {
             })
     }, [aaid, consentId])
 
+    const goBack = () => {
+        window.history.back();
+    };
+
     return (
         <div className='flex justify-center'>
             <div className="w-2/3">
-                <h1 className='text-4xl font-extrabold mb-5'>Consent details</h1>
+                <div className='flex gap-x-3'>
+                    <ArrowBackIcon className='cursor-pointer mt-3' onClick={goBack} />
+                    <h1 className='text-4xl font-extrabold mb-5'>Consent details</h1>
+                </div>
 
                 <div>
                     {consent &&
@@ -54,11 +62,11 @@ const FiReq = () => {
                                 <span>{consent.status}</span>
                             </div>
                             <hr />
-                            
+
                             <div className="flex items-center gap-24 p-5">
                                 <span className='w-24' style={{ color: 'rgb(62, 115, 152)' }}>Purpose</span>
                                 <span>{consent.consentDetail.Purpose.text}</span>
-                            </div> 
+                            </div>
                         </>
                     }
                 </div>

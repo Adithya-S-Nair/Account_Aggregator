@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { AccountDetailContext } from '../../Context/AccountDetailContext';
 import { useNavigate } from 'react-router-dom';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const AccountDetailsPage = () => {
 
@@ -19,11 +20,18 @@ const AccountDetailsPage = () => {
   const handleSubmit = () => {
     navigate('/branch/viewconsents')
   }
+
+  const goBack = () => {
+    window.history.back();
+  };
   // console.log(accountDetail);
   return (
     <div className='flex justify-center'>
       <div className='w-2/3'>
-        <h2 className="font-extrabold text-3xl tracking-normal	">Account Details</h2>
+        <div className='flex items-center gap-x-3'>
+          <ArrowBackIcon className='cursor-pointer' onClick={goBack} />
+          <h2 className="font-extrabold text-3xl tracking-normal">Account Details</h2>
+        </div>
         <div className='flex mt-8'>
           <img src={tree} alt="tree" style={{ borderRadius: '50%', width: '120px', height: '120px' }} />
           <div className='grid content-center ms-4 '>

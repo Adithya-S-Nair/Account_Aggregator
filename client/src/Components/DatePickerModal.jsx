@@ -24,7 +24,7 @@ const style = {
 
 
 
-const DatePickerModal = ({ dateModalOpen, setDateModalOpen, consentData, setFilteredData }) => {
+const DatePickerModal = ({ dateModalOpen, setDateModalOpen, consentData, filteredData, setFilteredData }) => {
 
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
@@ -37,14 +37,14 @@ const DatePickerModal = ({ dateModalOpen, setDateModalOpen, consentData, setFilt
 
     const handleSelect = (selectedDate) => {
         if (consentData) {
-            const filteredData = consentData.filter((task) => {
+            const filterData = filteredData.filter((task) => {
                 const projectDate = new Date(task.planned_start_date);
                 return (
                     projectDate >= selectedDate.selection.startDate &&
                     projectDate <= selectedDate.selection.endDate
                 );
             });
-            setFilteredData(filteredData);
+            setFilteredData(filterData);
         }
         setStartDate(selectedDate.selection.startDate);
         setEndDate(selectedDate.selection.endDate);
