@@ -6,95 +6,21 @@ import Typography from '@mui/material/Typography';
 import DatePickerModal from '../../Components/DatePickerModal';
 import { makeRequest } from '../../Axios';
 import { AccountDetailContext } from '../../Context/AccountDetailContext';
+import FiReq from './FiReq';
 
 const ViewConsents = () => {
     const navigate = useNavigate();
-    const [consentData, setConsentData] = useState()
+    // const [consentData, setConsentData] = useState()
     const [filteredList, setFilteredList] = useState([])
     const [dateModalOpen, setDateModalOpen] = useState(false)
-    const { aaid, setAaid } = useContext(AccountDetailContext)
+    const { aaid, setAaid, consentData, setConsentData } = useContext(AccountDetailContext)
 
     useEffect(() => {
         setFilteredList(consentData)
     }, [consentData])
 
-    // useEffect(() => {
-    //     setConsentData([
-    //         {
-    //             consentId: 1,
-    //             consentName: 'Consent 1',
-    //             consentType: 'xyz',
-    //             consentFrom: '10/10/2023',
-    //             consentTill: '10/10/2025'
-    //         },
-    //         {
-    //             consentId: 2,
-    //             consentName: 'Consent 2',
-    //             consentType: 'abc',
-    //             consentFrom: '12/15/2023',
-    //             consentTill: '12/15/2025'
-    //         },
-    //         {
-    //             consentId: 3,
-    //             consentName: 'Consent 3',
-    //             consentType: 'pqr',
-    //             consentFrom: '05/20/2023',
-    //             consentTill: '05/20/2025'
-    //         },
-    //         {
-    //             consentId: 4,
-    //             consentName: 'Consent 4',
-    //             consentType: 'lmn',
-    //             consentFrom: '08/08/2023',
-    //             consentTill: '08/08/2025'
-    //         },
-    //         {
-    //             consentId: 5,
-    //             consentName: 'Consent 5',
-    //             consentType: 'def',
-    //             consentFrom: '03/03/2023',
-    //             consentTill: '03/03/2025'
-    //         },
-    //         {
-    //             consentId: 6,
-    //             consentName: 'Consent 6',
-    //             consentType: 'ghi',
-    //             consentFrom: '07/07/2023',
-    //             consentTill: '07/07/2025'
-    //         },
-    //         {
-    //             consentId: 7,
-    //             consentName: 'Consent 7',
-    //             consentType: 'jkl',
-    //             consentFrom: '11/11/2023',
-    //             consentTill: '11/11/2025'
-    //         },
-    //         {
-    //             consentId: 8,
-    //             consentName: 'Consent 8',
-    //             consentType: 'uvw',
-    //             consentFrom: '04/04/2023',
-    //             consentTill: '04/04/2025'
-    //         },
-    //         {
-    //             consentId: 9,
-    //             consentName: 'Consent 9',
-    //             consentType: 'rst',
-    //             consentFrom: '09/09/2023',
-    //             consentTill: '09/09/2025'
-    //         },
-    //         {
-    //             consentId: 10,
-    //             consentName: 'Consent 10',
-    //             consentType: 'opq',
-    //             consentFrom: '06/06/2023',
-    //             consentTill: '06/06/2025'
-    //         }
-    //     ])
-    // }, [])
-
     useEffect(() => {
-        makeRequest.get(`/api/accountdetail/getconsents/${aaid}`)
+        makeRequest.get(`/accountdetail/getconsents/${aaid}`)
             .then((res) => {
                 setConsentData(res.data.ConsentList)
             }).catch((error) => {
@@ -175,7 +101,9 @@ const ViewConsents = () => {
                 filteredData={filteredList}
                 setFilteredData={setFilteredList}
             />
+            
         </div>
+        
     )
 }
 

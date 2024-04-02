@@ -6,7 +6,7 @@ export const accountDetails = (req, res) => {
     console.log(req.params.aaid);
     const {aaid} = req.params;
 
-    makeRequest.get(`/aa/branch/aaid?custid=${aaid}@finvu`)
+    makeRequest.get(`/aa/branch/aaid?custid=${aaid}`)
     .then((response) => {
         return res.status(200).json(response.data);
     }).catch((error) => {
@@ -19,7 +19,7 @@ export const getConsents = (req, res) => {
     // console.log(req.params.aaid);
     const {aaid} = req.params;
 
-    makeRequest.get(`/aa/list/consent?custid=${aaid}@finvu`)
+    makeRequest.get(`/aa/list/consent?custid=${aaid}`)
     .then((response) => {
         return res.status(200).json(response.data);
     }).catch((error) => {
@@ -32,7 +32,7 @@ export const getFiRequest = (req, res) => {
     // console.log(req.params.aaid);
     const {aaid, consentId} = req.params;
 
-    makeRequest.get(`/aa/list/FIRequest?custId=${aaid}@finvu&consentId=${consentId}`)
+    makeRequest.get(`/aa/list/FIRequest?custId=${aaid}&consentId=${consentId}`)
     .then((response) => {
         return res.status(200).json(response.data);
     }).catch((error) => {

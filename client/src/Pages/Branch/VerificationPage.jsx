@@ -22,7 +22,7 @@ const VerificationPage = () => {
     console.log(aaid);
 
     const handleSubmit = () => { 
-        makeRequest.get(`/api/accountdetail/accountdetails/${aaid}`)
+        makeRequest.get(`/accountdetail/accountdetails/${aaid}`)
             .then((res) => {
                 console.log(res.data);
                 setAccountDetail(res.data);

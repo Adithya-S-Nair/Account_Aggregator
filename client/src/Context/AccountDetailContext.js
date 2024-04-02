@@ -7,9 +7,10 @@ export const AccountDetailContextProvider = ({ children }) => {
 
     const [accountDetail, setAccountDetail] = useState(null)
     const [aaid, setAaid] = useState(null)
+    const [consentData, setConsentData] = useState()
     
     return (
-        <AccountDetailContext.Provider value={{ accountDetail, setAccountDetail, aaid, setAaid }}>
+        <AccountDetailContext.Provider value={{ accountDetail, setAccountDetail, aaid, setAaid, consentData, setConsentData }}>
             {children}
         </AccountDetailContext.Provider>
     )

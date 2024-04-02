@@ -7,21 +7,65 @@ const FiReq = () => {
     const [fiReqs, setFiReqs] = useState();
     const { aaid, setAaid } = useContext(AccountDetailContext)
     const { consentId } = useParams();
+    const { consentData } = useContext(AccountDetailContext)
+    const [consent, setConsent] = useState();
 
     useEffect(() => {
-        makeRequest.get(`/api/accountdetail/getfirequest/${aaid}/${consentId}`)
-        .then((res)=>{
-            console.log(res.data.FIRequestList);
-            setFiReqs(res.data.FIRequestList);
-        }).catch((error)=>{
-            console.log(error);
-        })
+        makeRequest.get(`/accountdetail/getfirequest/${aaid}/${consentId}`)
+            .then((res) => {
+                // console.log(res.data.FIRequestList);
+                setFiReqs(res.data.FIRequestList);
+            }).catch((error) => {
+                console.log(error);
+            })
     }, [])
 
+    // useEffect(() => {
+    //     console.log(consentId);
+    //     for (const i = 0; i < consentData.length; i++) {
+    //         if (consentData[i].consentId === consentId) {
+
+    //              setConsent(consentData[i]);
+    //         }
+    //     }
+    // }, [])
+
+    console.log(consent);
     return (
         <div className='flex justify-center'>
             <div className="w-2/3">
                 <h1 className='text-4xl font-extrabold mb-5'>Consent details</h1>
+                {/* <div>
+                    <div className="flex items-center gap-24 p-5">
+                        <span className='w-24' style={{ color: 'rgb(62, 115, 152)' }}>Consent id</span>
+                        <span>{consent.consentId}</span>
+                    </div>
+                    <hr />
+                    <div className="flex items-center gap-24 p-5">
+                        <span className='w-24' style={{ color: 'rgb(62, 115, 152)' }}>Created at</span>
+                        <span>{consent.consentDetail.consentStart}</span>
+                    </div>
+                    <hr />
+                    <div className="flex items-center gap-24 p-5">
+                        <span className='w-24' style={{ color: 'rgb(62, 115, 152)' }}>Updated at</span>
+                        <span>10/10/2024</span>
+                    </div>
+                    <hr />
+                    <div className="flex items-center gap-24 p-5">
+                        <span className='w-24' style={{ color: 'rgb(62, 115, 152)' }}>Expires at</span>
+                        <span>{consent.consentDetail.consentExpiry}</span>
+                    </div>
+                    <hr />
+                    <div className="flex items-center gap-24 p-5">
+                        <span className='w-24' style={{ color: 'rgb(62, 115, 152)' }}>Status</span>
+                        <span>{consent.status}</span>
+                    </div>
+                    <hr />
+                    <div className="flex items-center gap-32 p-5">
+                        <span className='w-24' style={{ color: 'rgb(62, 115, 152)' }}>Purpose</span>
+                        <span>{consent.consentDetail.Purpose}</span>
+                    </div>
+                </div> */}
                 <div>
                     <div className="flex items-center gap-24 p-5">
                         <span className='w-24' style={{ color: 'rgb(62, 115, 152)' }}>Consent id</span>
