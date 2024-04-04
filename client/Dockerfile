@@ -2,7 +2,7 @@
 FROM nginx:alpine
 
 # Copy custom Nginx configuration file
-COPY ./nginx.conf /etc/nginx/nginx.conf
+COPY ./nginx.conf /etc/nginx/conf.d/
 
 # Copy the build directory from the current directory to /var/www inside the container
 COPY ./build /var/www
