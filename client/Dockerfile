@@ -1,6 +1,9 @@
 # Use the official Nginx image based on Alpine Linux
 FROM nginx:alpine
 
+# Copy custom Nginx configuration file
+COPY ./nginx.conf /etc/nginx/nginx.conf
+
 # Copy the build directory from the current directory to /var/www inside the container
 COPY ./build /var/www
 
