@@ -32,7 +32,7 @@ const Verifyotp = () => {
     }, [user, setUser])
 
     const handleSubmit = () => {
-        console.log(otpData);
+        // console.log(otpData);
         makeRequest.post('/auth/verifyotp', {
             uid: otpData.Uid,
             otpref: otpData.OtpRef,

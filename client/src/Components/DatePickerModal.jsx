@@ -36,18 +36,20 @@ const DatePickerModal = ({ dateModalOpen, setDateModalOpen, consentData, filtere
     }
 
     const handleSelect = (selectedDate) => {
-        if (consentData) {
-            const filterData = filteredData.filter((task) => {
-                const projectDate = new Date(task.planned_start_date);
-                return (
-                    projectDate >= selectedDate.selection.startDate &&
-                    projectDate <= selectedDate.selection.endDate
-                );
-            });
-            setFilteredData(filterData);
-        }
-        setStartDate(selectedDate.selection.startDate);
-        setEndDate(selectedDate.selection.endDate);
+
+        console.log(selectedDate);
+        // if (consentData) {
+        //     const filterData = filteredData.filter((task) => {
+        //         const projectDate = new Date(task.planned_start_date);
+        //         return (
+        //             projectDate >= selectedDate.selection.startDate &&
+        //             projectDate <= selectedDate.selection.endDate
+        //         );
+        //     });
+        //     setFilteredData(filterData);
+        // }
+        // setStartDate(selectedDate.selection.startDate);
+        // setEndDate(selectedDate.selection.endDate);
     };
 
     return (

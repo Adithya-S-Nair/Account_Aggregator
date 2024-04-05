@@ -9,7 +9,6 @@ const PORT = process.env.PORT || 5000;
 import authRoute from './routes/authRoute.js'
 import accountDetailRoute from './routes/accountDetailsRoute.js'
 
-
 const app = express();
 
 app.use((req, res, next) => {
