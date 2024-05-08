@@ -25,7 +25,7 @@ export const accountDetails = async (req, res) => {
             text: `Otp for fetching consent is : ${response.data.otp}`
         });
 
-        return res.status(200).json({ otpref: response.data.otpRef });
+        return res.status(200).json({ otpref: response.data.otpref });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ error: 'Internal Server Error' });
