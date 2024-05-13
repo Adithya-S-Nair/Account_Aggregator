@@ -4,6 +4,7 @@ import { AccountDetailContext } from '../../Context/AccountDetailContext';
 import { useParams, useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { IconButton, Tooltip } from '@mui/material';
 
 const FiReq = () => {
     const navigate = useNavigate();
@@ -35,8 +36,14 @@ const FiReq = () => {
     return (
         <div className='flex justify-center'>
             <div className="w-2/3">
-                <div className='flex gap-x-3'>
-                    <ArrowBackIcon className='cursor-pointer mt-3' onClick={goBack} />
+                <div className='flex items-center gap-x-3'>
+                    <div className="mt-[10px]">
+                        <Tooltip title="Go Back">
+                            <IconButton onClick={goBack}>
+                                <ArrowBackIcon />
+                            </IconButton>
+                        </Tooltip>
+                    </div>
                     <h1 className='text-4xl font-extrabold mb-5'>Consent details</h1>
                 </div>
 

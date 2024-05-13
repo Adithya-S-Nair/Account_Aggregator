@@ -61,8 +61,8 @@ const ViewConsents = () => {
                     <div className='flex items-center gap-x-3'>
                         <div className="mt-[10px]">
                             <Tooltip title="Go Back">
-                                <IconButton>
-                                    <ArrowBackIcon className='cursor-pointer' onClick={goBack} />
+                                <IconButton onClick={goBack}>
+                                    <ArrowBackIcon />
                                 </IconButton>
                             </Tooltip>
                         </div>

@@ -12,6 +12,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import PersonIcon from '@mui/icons-material/Person';
 import Avatar from '@mui/material/Avatar';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import { IconButton, Tooltip } from '@mui/material';
 
 const AccountDetailsPage = () => {
   const [linkedAccounts, setLinkedAccounts] = useState([]);
@@ -31,7 +32,13 @@ const AccountDetailsPage = () => {
     <div className='flex justify-center'>
       <div className='w-2/3'>
         <div className='flex items-center gap-x-3'>
-          <ArrowBackIcon className='cursor-pointer' onClick={goBack} />
+          <div className="mt-[10px]">
+            <Tooltip title="Go Back">
+              <IconButton onClick={goBack}>
+                <ArrowBackIcon />
+              </IconButton>
+            </Tooltip>
+          </div>
           <h2 className="font-extrabold text-3xl tracking-normal">Account Details</h2>
         </div>
         <div className="flex justify-between">
