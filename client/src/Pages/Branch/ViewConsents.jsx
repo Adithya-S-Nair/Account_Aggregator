@@ -8,6 +8,7 @@ import { makeRequest } from '../../Axios';
 import { AccountDetailContext } from '../../Context/AccountDetailContext';
 import moment from 'moment';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { IconButton } from '@mui/material';
 
 const ViewConsents = () => {
     const navigate = useNavigate();
@@ -58,7 +59,9 @@ const ViewConsents = () => {
             <div className='w-2/3'>
                 <div className='flex justify-between items-center'>
                     <div className='flex items-center gap-x-3'>
-                        <ArrowBackIcon className='cursor-pointer' onClick={goBack} />
+                        <IconButton>
+                            <ArrowBackIcon className='cursor-pointer' onClick={goBack} />
+                        </IconButton>
                         <h1 className='text-4xl font-extrabold'>Consent Management</h1>
                     </div>
                     <button onClick={() => { setDateModalOpen(true) }} className='p-2 rounded-lg mt-3 flex items-center gap-5' style={{ background: 'rgb(231, 238, 243)' }}>
