@@ -59,7 +59,7 @@ const ViewConsents = () => {
             <div className='w-2/3'>
                 <div className='flex justify-between items-center'>
                     <div className='flex items-center gap-x-3'>
-                        <IconButton>
+                        <IconButton >
                             <ArrowBackIcon className='cursor-pointer' onClick={goBack} />
                         </IconButton>
                         <h1 className='text-4xl font-extrabold'>Consent Management</h1>
