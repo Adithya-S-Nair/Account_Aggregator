@@ -37,7 +37,7 @@ const FiReq = () => {
         <div className='flex justify-center'>
             <div className="w-2/3">
                 <div className='flex items-center gap-x-3'>
-                    <div className="mt-[10px]">
+                    <div className="mt-[-13px]">
                         <Tooltip title="Go Back">
                             <IconButton onClick={goBack}>
                                 <ArrowBackIcon />
